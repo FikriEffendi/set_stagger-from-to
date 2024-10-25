@@ -1,5 +1,5 @@
 <template>
-  <div class="grid h-screen grid-cols-3 place-items-center">
+  <div class="flex items-center justify-center h-screen gap-32">
     <div class="relative">
       <div class="aspect-[9/16] w-72">
         <img
