@@ -1,40 +1,58 @@
 <template>
   <div class="flex items-center justify-center h-screen gap-32">
-    <div class="relative">
-      <div class="aspect-[9/16] w-72">
-        <img
-          src="../../public/img1.jpg"
-          class="object-cover w-full h-full"
-          alt=""
-        />
+    <template v-for="(image, index) in images" :key="index">
+      <div class="relative">
+        <div class="aspect-[9/16] w-72">
+          <img
+            :src="image.src"
+            class="object-cover w-full h-full"
+            :alt="image.alt"
+            ref="imageRefs"
+          />
+        </div>
+        <div
+          class="absolute inset-0 flex items-center justify-center text-2xl font-bold"
+          :class="image.textClass"
+        >
+          <div>{{ image.text }}</div>
+        </div>
       </div>
-      <div
-        class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-white"
-      >
-        <div>Halo</div>
-      </div>
-    </div>
-    <div>
-      <div class="aspect-[9/16] w-72">
-        <img
-          src="../../public/img2.jpg"
-          class="object-cover w-full h-full"
-          alt=""
-        />
-      </div>
-    </div>
-    <div>
-      <div class="aspect-[9/16] w-72">
-        <img
-          src="../../public/img3.jpg"
-          class="object-cover w-full h-full"
-          alt=""
-        />
-      </div>
-    </div>
+    </template>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import gsap from "gsap";
+import { onMounted, ref } from "vue";
+
+const images = [
+  {
+    src: "../../public/img1.jpg",
+    alt: "",
+    text: "Living",
+    textClass: "text-white",
+  },
+  {
+    src: "../../public/img2.jpg",
+    alt: "",
+    text: "In",
+    textClass: "text-white",
+  },
+  {
+    src: "../../public/img3.jpg",
+    alt: "",
+    text: "Abstraction",
+    textClass: "text-[#6cb8d1] underline",
+  },
+];
+
+const imageRefs = ref([]);
+
+onMounted(() => {
+  gsap.set(imageRefs.value, {
+    yPercent: -125,
+  });
+});
+</script>
 
 <style lang="scss" scoped></style>
