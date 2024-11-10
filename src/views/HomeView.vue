@@ -11,7 +11,7 @@
           />
         </div>
         <div
-          class="absolute inset-0 flex items-center justify-center text-2xl font-bold"
+          class="absolute inset-0 flex items-center justify-center text-2xl font-bold text"
           :class="image.textClass"
         >
           <div>{{ image.text }}</div>
@@ -50,9 +50,30 @@ const imageRefs = ref([]);
 
 onMounted(() => {
   gsap.set(imageRefs.value, {
-    yPercent: -125,
+    yPercent: -115,
+  });
+
+  gsap.set(".text", {
+    opacity: 0,
+  });
+
+  gsap.to(imageRefs.value, {
+    yPercent: 0,
+    scale: 1.12,
+    delay: 0.5,
+    duration: 1.5, //durasi keseluruhan animasi sampai semua gambar keluar
+    stagger: 0.1,
+    ease: "power4.out",
+    onComplete: scaleDownAndFadeIn,
   });
 });
+
+const scaleDownAndFadeIn = () => {
+  gsap.to(imageRefs.value, {
+    scale: 1,
+    duration: 1,
+  });
+};
 </script>
 
 <style lang="scss" scoped></style>
