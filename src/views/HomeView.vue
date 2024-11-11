@@ -61,7 +61,7 @@ onMounted(() => {
     yPercent: 0,
     scale: 1.12,
     delay: 0.5,
-    duration: 1.5, //durasi keseluruhan animasi sampai semua gambar keluar
+    duration: 1.5,
     stagger: 0.1,
     ease: "power4.out",
     onComplete: scaleDownAndFadeIn,
@@ -71,8 +71,28 @@ onMounted(() => {
 const scaleDownAndFadeIn = () => {
   gsap.to(imageRefs.value, {
     scale: 1,
-    duration: 1,
+    duration: 2,
   });
+
+  // gsap.to(".text", {
+  //   opacity: 1,
+  //   y: 20,
+  //   stagger: 0.2,
+  //   duration: 2,
+  // });
+
+  gsap.fromTo(
+    ".text",
+    {
+      y: -50,
+    },
+    {
+      opacity: 1,
+      y: 0,
+      stagger: 0.2,
+      duration: 2,
+    }
+  );
 };
 </script>
 
